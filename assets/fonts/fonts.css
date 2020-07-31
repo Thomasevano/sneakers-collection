@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Futura book";
+  src: url("Futura-Book.woff") format("woff"),
+    url("Futura-Book.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Futura bold";
+  src: url("Futura_bold.woff") format("woff"),
+    url("Futura_bold.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}

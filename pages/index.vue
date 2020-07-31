@@ -134,15 +134,12 @@ export default {
     searchSneaker() {
       console.log(`Checking name: ${this.sneakerBrand} ${this.sneakerName}`);
       this.$axios
-        .$get(
-          "https://cors.io/?https://api.thesneakerdatabase.com/v1/sneakers?limit=10",
-          {
-            params: {
-              name: this.sneakerName,
-              brand: this.brand,
-            },
-          }
-        )
+        .$get("https://api.thesneakerdatabase.com/v1/sneakers?limit=10", {
+          params: {
+            name: this.sneakerName,
+            brand: this.sneakerBrand,
+          },
+        })
         .then((res) => {
           console.log(res);
         })

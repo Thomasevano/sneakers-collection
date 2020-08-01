@@ -1,93 +1,32 @@
 <template>
   <main class="home">
+    <h2 class="section-title">Recherchez des sneakers</h2>
     <section>
       <form class="flex items-center">
-        <div class="flex-1 relative my-4 m-2 border-b-2 focus-within:border-black">
-          <input
-            v-model="sneakerName"
-            @keyup="searchSneaker"
-            type="text"
-            id="sneakerName"
-            placeholder
-            class="block w-full appearance-none focus:outline-none bg-transparent"
-          />
-          <label
-            for="sneakerName"
-            class="absolute top-0 left-0 -z-1 duration-300 origin-0"
-          >Nom de la Sneaker</label>
-        </div>
-        <div class="flex-1 m-2">
-          <!-- <label class="block tracking-wide mb-2" for="brand">Marque</label> -->
-          <div class="relative">
-            <select
-              class="block w-full appearance-none bg-transparent border-b-2 focus:outline-none focus-within:border-black"
-              id="brand"
-              v-model="sneakerBrand"
-            >
-              <option value>Marque</option>
-              <option v-for="brand in brands.results" :key="brand.id" :value="brand">{{ brand }}</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-              <svg
-                class="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div class="flex-1 m-2">
-          <!-- <label class="block tracking-wide mb-2" for="gender">Genre</label> -->
-          <div class="relative">
-            <select
-              class="block w-full appearance-none bg-transparent border-b-2 focus:outline-none focus-within:border-black"
-              id="gender"
-            >
-              <option value>Genre</option>
-              <option
-                v-for="gender in genders.results"
-                :key="gender.id"
-                :value="gender"
-              >{{ gender }}</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2">
-              <svg
-                class="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex-1 relative my-4 m-2 border-b-2 focus-within:border-black">
-          <input
-            type="text"
-            id="releaseDate"
-            placeholder
-            class="block w-full appearance-none focus:outline-none bg-transparent"
-          />
-          <label
-            for="releaseDate"
-            class="absolute top-0 left-0 -z-1 duration-300 origin-0"
-          >Date de sortie</label>
-        </div>
-        <button @click.prevent="searchSneaker" class="btn">
-          search
-          <span class="badge badge-primary"></span>
-        </button>
+        <Input
+          inputType="text"
+          inputName="Nom de la Sneaker"
+          inputId="sneakerName"
+          v-model="sneakerName"
+        />
+        <Select :items="brands" selectName="Marque" selectId="brands" v-model="sneakerBrand"></Select>
+        <Select :items="genders" selectName="Genre" selectId="genders" v-model="sneakerGender"></Select>
+        <Input
+          inputType="number"
+          inputName="Année de sortie"
+          inputId="releaseYear"
+          v-model="sneakerReleaseYear"
+        />
+        <!-- <Input
+          inputType="date"
+          inputName="Date de sortie"
+          inputId="releaseDate"
+          v-model="sneakerReleaseDate"
+        />-->
+        <button @click.prevent="searchSneaker" class="button">Rechercher</button>
       </form>
     </section>
-    <h2 class="section-title">Les {{ sneakers.length }} prochaines sorties</h2>
-
+    <h2 class="section-title">{{ sectionTitle }}</h2>
     <section class="latest-articles">
       <div v-for="sneaker in sneakers" :key="sneaker.id" class="article">
         <nuxt-link :to="'/sneaker/' + sneaker.id">
@@ -119,53 +58,81 @@
 </template>
 
 <script>
+import Input from "~/components/atoms/Input";
+import Select from "~/components/atoms/Select";
+
 export default {
   name: "Home",
+  components: {
+    Input,
+    Select,
+  },
   computed: {
     nextRelease: function () {
       const inOneWeek = this.$moment().add(7, "days");
       return this.$moment(inOneWeek).format("YYYY-MM-DD");
     },
   },
-  data() {
-    return { sneakers: [], sneakerName: "", sneakerBrand: "" };
-  },
   methods: {
     searchSneaker() {
-      console.log(`Checking name: ${this.sneakerBrand} ${this.sneakerName}`);
-      this.$axios
-        .$get("https://api.thesneakerdatabase.com/v1/sneakers?limit=10", {
-          params: {
-            name: this.sneakerName,
-            brand: this.sneakerBrand,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      console.log(
+        `Checking name: ${this.sneakerName}, brand: ${this.sneakerBrand}, gender: ${this.sneakerGender}, releaseYear: ${this.sneakerReleaseYear}, releaseDate: ${this.sneakerReleaseDate}`
+      );
+      fetch(
+        `https://api.thesneakerdatabase.com/v1/sneakers?limit=100&` +
+          new URLSearchParams({
+            ...(this.sneakerName && { name: this.sneakerName }),
+            ...(this.sneakerBrand && { brand: this.sneakerBrand }),
+            ...(this.sneakerGender && { gender: this.sneakerGender }),
+            ...(this.sneakerReleaseYear && {
+              releaseYear: this.sneakerReleaseYear,
+            }),
+            ...(this.sneakerReleaseDate && {
+              releaseDate: this.sneakerReleaseDate,
+            }),
+          })
+      )
+        .then((response) => response.json())
+        .then((result) => (this.sneakers = result.results))
+        .then(
+          (number) =>
+            (this.sectionTitle = `${number.length} résultats correponsdant`)
+        );
     },
   },
-  async fetch() {
-    const sneakers = await this.$axios.$get(
+  data() {
+    return {
+      sneakers: [],
+      brands: {},
+      genders: {},
+      sneakerName: "",
+      sneakerBrand: "",
+      sneakerGender: "",
+      sneakerReleaseYear: "",
+      sneakerReleaseDate: "",
+      sectionTitle: "",
+    };
+  },
+  created() {
+    fetch(
       `https://api.thesneakerdatabase.com/v1/sneakers?limit=10&releaseDate=lte:${
         this.nextRelease
       }&releaseDate=gte:${this.$moment().format(
         "YYYY-MM-DD"
       )}&sort=releaseDate:asc`
-    );
-    this.sneakers = sneakers.results;
-  },
-  async asyncData({ $axios, $moment }) {
-    const genders = await $axios.$get(
-      "https://api.thesneakerdatabase.com/v1/genders"
-    );
-    const brands = await $axios.$get(
-      "https://api.thesneakerdatabase.com/v1/brands"
-    );
-    return { genders, brands };
+    )
+      .then((response) => response.json())
+      .then((result) => (this.sneakers = result.results))
+      .then(
+        (number) =>
+          (this.sectionTitle = `Les ${this.sneakers.length} prochaines sorties`)
+      );
+    fetch("https://api.thesneakerdatabase.com/v1/brands")
+      .then((response) => response.json())
+      .then((result) => (this.brands = result));
+    fetch("https://api.thesneakerdatabase.com/v1/genders")
+      .then((response) => response.json())
+      .then((result) => (this.genders = result));
   },
 };
 </script>

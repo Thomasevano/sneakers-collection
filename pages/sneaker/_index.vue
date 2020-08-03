@@ -26,11 +26,19 @@ export default {
       response.json().then((data) => {
         this.sneaker = data.results[0];
         console.log(data.results);
+        console.log(this.$route);
       });
     });
   },
   data() {
     return { sneaker: {} };
+  },
+  head() {
+    let sneaker = this.sneaker;
+
+    return {
+      title: `${sneaker.title} - Sneakers Collection`,
+    };
   },
 };
 </script>

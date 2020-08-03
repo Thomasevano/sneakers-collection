@@ -2,7 +2,7 @@
   <main class="home">
     <h2 class="section-title">Recherchez des sneakers</h2>
     <section>
-      <form class="flex items-center">
+      <form class="md:flex items-center">
         <Input
           inputType="text"
           inputName="Nom de la Sneaker"

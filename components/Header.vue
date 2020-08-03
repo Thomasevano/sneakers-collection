@@ -1,6 +1,9 @@
 <template>
   <header>
     <div class="header__container">
+      <nuxt-link to="/" class="logo-container">
+        <img class="logo" src="~/assets/img/logo.svg" alt />
+      </nuxt-link>
       <input id="burger" class="burger__checkbox" type="checkbox" />
       <label for="burger" class="burger__menu">
         <span></span>
@@ -10,9 +13,6 @@
       <nav class="nav burger__nav">
         <nuxt-link to="/">Accueil</nuxt-link>
       </nav>
-      <nuxt-link to="/" class="logo-container">
-        <img class="logo" src="~/assets/img/logo.svg" alt />
-      </nuxt-link>
     </div>
     <nav class="nav desktop__nav">
       <nuxt-link to="/">Accueil</nuxt-link>
@@ -72,6 +72,7 @@ input[type="checkbox"] {
   height: 25px;
   width: 30px;
   position: relative;
+  top: 22px;
 }
 
 .burger__menu span {

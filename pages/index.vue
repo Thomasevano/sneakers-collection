@@ -17,12 +17,12 @@
           inputId="releaseYear"
           v-model="sneakerReleaseYear"
         />
-        <!-- <Input
+        <Input
           inputType="date"
           inputName="Date de sortie"
           inputId="releaseDate"
           v-model="sneakerReleaseDate"
-        />-->
+        />
         <button @click.prevent="searchSneaker" class="button">Rechercher</button>
       </form>
     </section>
@@ -88,7 +88,7 @@ export default {
               releaseYear: this.sneakerReleaseYear,
             }),
             ...(this.sneakerReleaseDate && {
-              releaseDate: this.sneakerReleaseDate,
+              releaseDate: this.sneakerReleaseDate + ' 23:59:59',
             }),
           })
       )

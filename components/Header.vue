@@ -1,9 +1,9 @@
 <template>
   <header>
     <div class="header__container">
-      <nuxt-link to="/" class="logo-container">
-        <img class="logo" src="~/assets/img/logo.svg" alt />
-      </nuxt-link>
+      <!-- <nuxt-link to="/" class="logo-container">
+        <img class="logo" src="~/assets/img/" alt />
+      </nuxt-link> -->
       <input id="burger" class="burger__checkbox" type="checkbox" />
       <label for="burger" class="burger__menu">
         <span></span>

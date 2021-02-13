@@ -13,6 +13,8 @@
         <Select :items="genders" selectName="Genre" selectId="genders" v-model="sneakerGender"></Select>
         <Input
           inputType="number"
+          minNumber="1900"
+          maxNumber="2030"
           inputName="Année de sortie"
           inputId="releaseYear"
           v-model="sneakerReleaseYear"
@@ -28,16 +30,16 @@
     </section>
     <h2 class="section-title">{{ sectionTitle }}</h2>
     <section class="latest-articles">
-      <div v-for="sneaker in sneakers" :key="sneaker.id" class="article">
-        <nuxt-link :to="'/sneaker/' + sneaker.id">
+      <div v-for="sneaker in sneakers" :key="sneaker.sku" class="article">
+        <nuxt-link :to="'/sneaker/' + sneaker.sku">
           <div class="gradient-overlay"></div>
           <figure class="article-img">
-            <img v-if="sneaker.media" :src="sneaker.media.smallImageUrl" alt />
-            <img v-else src="http://via.placeholder.com/450x250" alt />
+            <img :src="sneaker.imgUrl" alt="sneaker image" />
           </figure>
           <div class="article-textblock">
             <div class="article-intro">
-              <h3 class="article-title">{{ sneaker.title }}</h3>
+              <h3 v-if="sneaker.name.length<45" class="article-title">{{ sneaker.name }}</h3>
+              <h3 v-if="sneaker.name.length>=45" class="article-title">{{ sneaker.name.substring(0,45)+"..." }}</h3>
               <p class="article-info">
                 Sortie le
                 {{ $moment(sneaker.releaseDate).format("dddd D MMMM YYYY") }}
@@ -45,7 +47,9 @@
               <p class="article-info">{{ sneaker.retailPrice }} $</p>
             </div>
             <div class="article-description">
-              <p class="description-text">{{ sneaker.description }}</p>
+              <p v-if="sneaker.story.length<80" class="description-text">{{ sneaker.story }}</p>
+              <p v-if="sneaker.story.length>=80" class="description-text">{{ sneaker.story.substring(0,70)+"..." }}</p>
+              <p v-else class="description-text">{{ sneaker.name }}</p>
               <div class="button">
                 <p>Plus d'infos</p>
               </div>
@@ -75,11 +79,8 @@ export default {
   },
   methods: {
     searchSneaker() {
-      console.log(
-        `Checking name: ${this.sneakerName}, brand: ${this.sneakerBrand}, gender: ${this.sneakerGender}, releaseYear: ${this.sneakerReleaseYear}, releaseDate: ${this.sneakerReleaseDate}`
-      );
       fetch(
-        `https://api.thesneakerdatabase.com/v1/sneakers?limit=100&` +
+        `https://api.thesneakerdatabase.dev/v2/sneakers?limit=100&` +
           new URLSearchParams({
             ...(this.sneakerName && { name: this.sneakerName }),
             ...(this.sneakerBrand && { brand: this.sneakerBrand }),
@@ -88,16 +89,13 @@ export default {
               releaseYear: this.sneakerReleaseYear,
             }),
             ...(this.sneakerReleaseDate && {
-              releaseDate: this.sneakerReleaseDate + ' 23:59:59',
+              releaseDate: this.sneakerReleaseDate,
             }),
           })
       )
         .then((response) => response.json())
         .then((result) => (this.sneakers = result.results))
-        .then(
-          (number) =>
-            (this.sectionTitle = `${number.length} résultats correponsdant`)
-        );
+        .then((number) => (this.sectionTitle = `${number.length} résultats correponsdant`))
     },
   },
   data() {
@@ -115,7 +113,7 @@ export default {
   },
   created() {
     fetch(
-      `https://api.thesneakerdatabase.com/v1/sneakers?limit=10&releaseDate=lte:${
+      `https://api.thesneakerdatabase.dev/v2/sneakers?limit=10&gender=men&gender=women&releaseDate=lte:${
         this.nextRelease
       }&releaseDate=gte:${this.$moment().format(
         "YYYY-MM-DD"
@@ -123,14 +121,13 @@ export default {
     )
       .then((response) => response.json())
       .then((result) => (this.sneakers = result.results))
-      .then(
-        (number) =>
-          (this.sectionTitle = `Les ${this.sneakers.length} prochaines sorties`)
-      );
-    fetch("https://api.thesneakerdatabase.com/v1/brands")
+      .then(() => (this.sectionTitle = `Les ${this.sneakers.length} prochaines sorties`))
+
+    fetch("https://api.thesneakerdatabase.dev/v2/brands")
       .then((response) => response.json())
       .then((result) => (this.brands = result));
-    fetch("https://api.thesneakerdatabase.com/v1/genders")
+
+    fetch("https://api.thesneakerdatabase.dev/v2/genders")
       .then((response) => response.json())
       .then((result) => (this.genders = result));
   },

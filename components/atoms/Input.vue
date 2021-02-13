@@ -4,6 +4,8 @@
       :type="inputType"
       :id="inputId"
       placeholder
+      :min="minNumber"
+      :max="maxNumber"
       class="block w-full appearance-none focus:outline-none bg-transparent"
       v-on:input="updateValue($event.target.value)"
     />
@@ -19,12 +21,18 @@ export default {
     inputId: String,
     inputName: {
       type: String,
-      default: null,
+      // default: null,
     },
     value: {
       type: String,
-      default: null,
+      // default: null,
     },
+    minNumber: {
+      type: String,
+    },
+    maxNumber: {
+      type: String,
+    }
   },
   methods: {
     updateValue: function (value) {

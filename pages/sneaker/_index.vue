@@ -1,19 +1,25 @@
 <template>
   <div v-if="sneaker" class="post">
-    <h1 class="article_title">{{ sneaker.title }}</h1>
+    <h1 class="article_title">{{ sneaker.name }}</h1>
 
-    <img v-if="sneaker.media" :src="sneaker.media.imageUrl" alt="article image" />
-    <img v-else src="http://via.placeholder.com/250x250" alt="article image" />
+    <img :src="sneaker.imgUrl" alt="sneaker image" />
 
     <div class="article_details">
       <span class="article_author">{{ sneaker.brand }}</span>
-      <span class="article_author">{{ sneaker.retailPrice }} $</span>
+      <span class="article_author">Prix de vente: {{ sneaker.retailPrice }} $</span>
+      <span class="article_author">Prix de revente estimé: {{ sneaker.estimatedMarketValue }} $</span>
       <span
         class="article_date"
       >Sortie le {{ $moment(sneaker.releaseDate).format("dddd D MMMM YYYY") }}</span>
     </div>
 
-    <p class="article_content intro">{{ sneaker.description }}</p>
+    <p class="article_content intro">{{ sneaker.story }}</p>
+    <div v-if="resellLinks.length > 0">
+      <div v-for="(link, index) in resellLinks" :key="index">
+          <a :href="link" class="article_author">Acheter sur: {{ link }}</a>
+      </div>
+    </div>
+    <p v-else>Il n'y a pas de liens de revente connu</p>
   </div>
 </template>
 
@@ -21,23 +27,22 @@
 export default {
   created() {
     fetch(
-      `https://api.thesneakerdatabase.com/v1/sneakers/${this.$route.params.index}`
+      `https://api.thesneakerdatabase.dev/v2/sneakers/${this.$route.params.index}`
     ).then((response) => {
       response.json().then((data) => {
         this.sneaker = data.results[0];
-        console.log(data.results);
-        console.log(this.$route);
+        this.resellLinks = this.sneaker.links.slice(1, -1).split(', ');
       });
     });
   },
   data() {
-    return { sneaker: {} };
+    return { sneaker: {}, resellLinks: [] };
   },
   head() {
     let sneaker = this.sneaker;
 
     return {
-      title: `${sneaker.title} - Sneakers Collection`,
+      title: `${sneaker.name} - Sneakers Collection`,
     };
   },
 };

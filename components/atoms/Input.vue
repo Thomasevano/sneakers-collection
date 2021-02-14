@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 relative my-4 m-2 border-b-2 focus-within:border-black">
+  <div class="flex-1 relative my-6 m-2 border-b-2 focus-within:border-black">
     <input
       :type="inputType"
       :id="inputId"

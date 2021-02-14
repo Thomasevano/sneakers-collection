@@ -169,7 +169,7 @@ export default {
   font-weight: bold;
   font-size: 2rem;
   text-transform: uppercase;
-  margin-bottom: 40px;
+  margin: 40px 0;
 }
 
 .latest-articles {
@@ -266,6 +266,10 @@ export default {
 @media (min-width: 600px) {
   .home {
     margin: 40px auto;
+  }
+
+  .button {
+    margin-left: 15px;
   }
 
   .first-article-img {

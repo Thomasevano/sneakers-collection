@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-1 m-2">
+  <div class="flex-1 relative my-6 m-2">
     <div class="relative">
       <select
         class="block w-full appearance-none bg-transparent border-b-2 focus:outline-none focus-within:border-black"

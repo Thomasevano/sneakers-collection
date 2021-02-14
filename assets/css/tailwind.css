@@ -9,3 +9,9 @@ form input:focus-within ~ label,
 input[type="date"] ~ label {
   @apply transform scale-75 -translate-y-6;
 }
+
+@media (max-width: 768px) {
+  input[type="date"] {
+    margin-top: 3rem;
+  }
+}

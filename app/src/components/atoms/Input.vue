@@ -5,6 +5,7 @@
       :id="inputId"
       :min="minNumber"
       :max="maxNumber"
+      :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
       class="block w-full appearance-none focus:outline-none bg-transparent"
     />

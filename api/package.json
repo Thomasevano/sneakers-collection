@@ -8,7 +8,7 @@
   },
   "keywords": [],
   "author": "Thomasevano",
-  "license": "ISC",
+  "license": "AGPL-3.0",
   "dependencies": {
     "fastify": "^3.22.1",
     "sneaks-api": "^1.1.8"

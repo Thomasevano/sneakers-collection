@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "build": "tsc",
+    "start": "node build/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,5 +17,8 @@
   "dependencies": {
     "fastify": "^3.22.1",
     "sneaks-api": "^1.1.8"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
   }
 }

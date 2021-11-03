@@ -2,13 +2,17 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Thomasevano",
   "license": "AGPL-3.0",
+  "engines": {
+    "node": ">=16.13.0"
+  },
   "dependencies": {
     "fastify": "^3.22.1",
     "sneaks-api": "^1.1.8"

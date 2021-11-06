@@ -1,16 +1,12 @@
-// Require the framework and instantiate it
-const fastify = require('fastify')({ logger: true });
+import { app } from './app';
 
-// Declare a route
-fastify.get('/', async () => 'hello world');
+const server = app();
 
-// Run the server!
-const start = async () => {
-  try {
-    await fastify.listen(3000);
-  } catch (err) {
-    fastify.log.error(err);
+server.listen(3000, (err: Error, address: string) => {
+  if (err) {
+    console.error(err);
     process.exit(1);
   }
-};
-start();
+
+  console.log(`Server listening at ${address}`);
+});

@@ -2,21 +2,22 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
-    jest: true,
+    jest: true
   },
   extends: [
-    'airbnb-base',
-    'plugin:jest/recommended',
+    'standard'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   plugins: [
     '@typescript-eslint',
-    'jest',
+    'jest'
   ],
   rules: {
-  },
+    semi: ['error', 'always'],
+    'space-before-function-paren': ['error', 'never']
+  }
 };

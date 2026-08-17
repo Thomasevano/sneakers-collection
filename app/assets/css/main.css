@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+	--color-background: #ffffff;
+	--color-foreground: #111111;
+	--color-surface: #f4f4f5;
+	--color-muted: #71717a;
+	--color-line: rgb(0 0 0 / 0.1);
+	--color-primary: #006fee;
+	--color-primary-foreground: #ffffff;
+}
+
+@layer base {
+	.dark {
+		--color-background: #000000;
+		--color-foreground: #f4f4f5;
+		--color-surface: #18181b;
+		--color-muted: #a1a1aa;
+		--color-line: #2a2a2a;
+	}
+
+	html {
+		background: var(--color-background);
+		color: var(--color-foreground);
+	}
+
+	body {
+		min-width: 320px;
+		min-height: 100dvh;
+		font-family: var(--font-sans);
+		-webkit-font-smoothing: antialiased;
+	}
+
+	button,
+	a,
+	input {
+		touch-action: manipulation;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+}

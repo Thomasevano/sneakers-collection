@@ -1,6 +1,7 @@
 # Sneakers Collection
 
-A Nuxt application for a personal sneaker collection.
+A responsive Nuxt sneaker catalog for searching releases and comparing current
+resale listings.
 
 ## Stack
 
@@ -9,6 +10,13 @@ A Nuxt application for a personal sneaker collection.
 - Tailwind CSS 4
 - TypeScript
 - Nuxt Color Mode
+
+## Data
+
+Server routes normalize public GOAT and Flight Club storefront search results.
+StockX is linked as a direct style-code lookup because its public storefront
+does not expose a stable price feed. Collection, favorite, and wanted-list
+features are planned but are not represented by demo data.
 
 ## Development
 

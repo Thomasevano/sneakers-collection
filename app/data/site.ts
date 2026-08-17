@@ -1,11 +1,11 @@
 export const site = {
 	name: "Sneakers Collection",
-	description: "A personal sneaker collection.",
+	description:
+		"Search live sneaker releases and compare resale listings across popular marketplaces.",
 	navigation: [
-		{ label: "Home", to: "/" },
-		{ label: "Docs", to: "/docs" },
-		{ label: "Pricing", to: "/pricing" },
-		{ label: "Blog", to: "/blog" },
+		{ label: "Releases", to: "/releases" },
+		{ label: "Search", to: "/search" },
+		{ label: "Journal", to: "/blog" },
 		{ label: "About", to: "/about" },
 	],
 } as const;

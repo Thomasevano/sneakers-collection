@@ -11,7 +11,7 @@
 			<slot />
 		</main>
 		<footer class="border-t border-line px-5 py-6 text-center text-sm text-muted">
-			Built with Nuxt.
+			Sneakers Collection — built for the rotation.
 		</footer>
 	</div>
 </template>

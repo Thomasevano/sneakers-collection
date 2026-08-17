@@ -20,9 +20,11 @@ export default defineNuxtConfig({
 			meta: [
 				{
 					name: "description",
-					content: "A personal sneaker collection.",
+					content:
+						"Search live sneaker releases and compare resale listings across popular marketplaces.",
 				},
 			],
+			htmlAttrs: { lang: "en" },
 			link: [{ rel: "icon", href: "/favicon.ico" }],
 		},
 	},

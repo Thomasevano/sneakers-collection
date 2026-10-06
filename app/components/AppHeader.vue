@@ -38,12 +38,20 @@ watch(
 				<span
 					class="flex size-9 items-center justify-center rounded-full bg-primary text-primary-foreground"
 				>
-					<svg aria-hidden="true" class="size-6" viewBox="0 0 32 32">
+					<svg
+						aria-hidden="true"
+						class="size-6"
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						viewBox="0 0 24 24"
+					>
+						<path d="m15 10.42 4.8-5.07" />
+						<path d="M19 18h3" />
 						<path
-							clip-rule="evenodd"
-							d="M17.65 10.13 15.88 7.03 7.03 22.55h3.5l7.12-12.42Zm2.23 3.92-1.77 3.15 1.28 2.25h-2.55l-1.74 3.1h9.63l-4.85-8.5Z"
-							fill="currentColor"
-							fill-rule="evenodd"
+							d="M9.5 22 21.414 9.415A2 2 0 0 0 21.2 6.4l-5.61-4.208A1 1 0 0 0 14 3v2a2 2 0 0 1-1.394 1.906L8.677 8.053A1 1 0 0 0 8 9c-.155 6.393-2.082 9-4 9a2 2 0 0 0 0 4h14"
 						/>
 					</svg>
 				</span>

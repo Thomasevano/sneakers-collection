@@ -118,8 +118,8 @@ function submitSearch() {
 					Collections, favorites, and wanted lists are next.
 				</h2>
 				<p class="mt-4 max-w-xl text-pretty leading-7 text-background/70">
-					The live catalog comes first. Personal shelves will build on the same sneaker
-					records instead of a separate demo dataset.
+					Search real releases and marketplace listings today. Soon, you'll be able to
+					save any pair to your collection, favorites, or wanted list.
 				</p>
 			</div>
 			<NuxtLink

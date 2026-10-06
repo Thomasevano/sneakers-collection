@@ -16,7 +16,7 @@ resale listings.
 Server routes normalize public GOAT and Flight Club storefront search results.
 StockX is linked as a direct style-code lookup because its public storefront
 does not expose a stable price feed. Collection, favorite, and wanted-list
-features are planned but are not represented by demo data.
+features are planned and are not implemented yet.
 
 ## Development
 

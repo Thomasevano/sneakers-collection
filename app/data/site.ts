@@ -5,7 +5,6 @@ export const site = {
 	navigation: [
 		{ label: "Releases", to: "/releases" },
 		{ label: "Search", to: "/search" },
-		{ label: "Journal", to: "/blog" },
 		{ label: "About", to: "/about" },
 	],
 } as const;

@@ -1,0 +1,13 @@
+.git
+.nuxt
+.output
+node_modules
+coverage
+dist
+.env
+.env.*
+*.log
+*.tsbuildinfo
+.DS_Store
+.vscode
+*.pem
